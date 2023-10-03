@@ -288,4 +288,4 @@ if __name__=="__main__":
     import uvicorn
     # Load sample data when the application starts
     load_sample_data()
-    uvicorn.run(app)
+    uvicorn.run(app, host="0.0.0.0", port=8000)
