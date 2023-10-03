@@ -3,6 +3,7 @@ from fastapi.responses import JSONResponse
 from pydantic import BaseModel
 import sqlite3
 from datetime import datetime
+from typing import List
 
 app = FastAPI(debug=True)
 
@@ -176,7 +177,7 @@ def read_doctor(doctor_id: int):
         return Doctor(id=row[0], name=row[1], specialty=row[2], max_patients=row[3], practice_location=row[4], practice_time=row[5])
     raise HTTPException(status_code=404, detail="Doctor not found")
 
-@app.get("/doctors/", response_model=list[Doctor])
+@app.get("/doctors/", response_model=List[Doctor])
 def read_doctors():
     conn = sqlite3.connect("appointment_system.db")
     cursor = conn.cursor()
@@ -269,7 +270,7 @@ def book_appointment(appointment: Appointment):
 #     return Patient(id=patient_id, **patient_data)
 
 
-@app.get("/patients/", response_model=list[Patient])
+@app.get("/patients/", response_model=List[Patient])
 def read_patients():
     conn = sqlite3.connect("appointment_system.db")
     cursor = conn.cursor()
