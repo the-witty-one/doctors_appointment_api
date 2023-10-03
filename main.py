@@ -146,7 +146,9 @@ def load_sample_data():
     conn.commit()
     conn.close()
 
-
+@app.get("/")
+async def read_root():
+    return {"message": "Hello, World!"}
 
 @app.post("/doctor/", response_model=Doctor)
 def create_doctor(doctor: Doctor):
